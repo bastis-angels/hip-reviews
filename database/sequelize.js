@@ -1,90 +1,82 @@
-const  user = require('./info.js');
 const Sequelize = require('sequelize');
+const user = require('./info.js');
 
-let db = new Sequelize('user_reviews', user.username, user.password, {
-    dialect: 'mysql'
+
+const db = new Sequelize('user_reviews', user.username, user.password, {
+  dialect: 'mysql',
 });
 
-let User = db.define('users', {
-    user_id: {type:Sequelize.INTEGER, primaryKey: true,  autoIncrement: true },
-    name: Sequelize.STRING,
-    avatar: Sequelize.STRING
+const User = db.define('users', {
+  user_id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+  name: Sequelize.STRING,
+  avatar: Sequelize.STRING,
 });
 
-let Location = db.define('locations', {
-    loc_id: {type:Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-    loc_name: Sequelize.STRING
+const Location = db.define('locations', {
+  loc_id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+  loc_name: Sequelize.STRING,
 });
 
-let Review = db.define('reviews', {
-    review_id: {type:Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-    user_id: {type:Sequelize.INTEGER },
-    loc_id: {type:Sequelize.INTEGER },
-    context: Sequelize.STRING
+const Review = db.define('reviews', {
+  review_id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+  user_id: { type: Sequelize.INTEGER },
+  loc_id: { type: Sequelize.INTEGER },
+  context: Sequelize.STRING,
 });
 
-let Image = db.define('images', {
-    image_id: {type:Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    review_id:  {type:Sequelize.INTEGER, primaryKey: true},
-    image_url: Sequelize.STRING,
-    image_description: Sequelize.STRING
+const Image = db.define('images', {
+  image_id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+  review_id: { type: Sequelize.INTEGER, primaryKey: true },
+  image_url: Sequelize.STRING,
+  image_description: Sequelize.STRING,
 });
 
-let saveLocation = (data) => {
-    Location.sync()
-    .then(function() {
-      // Now instantiate an object and save it:
-      return Location.create(data);
-    })
-    .catch(function(err) {
-      // Handle any error in the chain
-      console.error(err);
-      db.close();
-    });
-}
+const saveLocation = (data, callback = () => {}) => {
+  Location.sync()
+    .then(() => Location.create(data)) // Now instantiate an object and save it:
+    .then(res => callback(res))
+    .catch(err => callback(err));
+};
 
-let saveUser = (data) => {
-    User.sync()
-    .then(function() {
-      // Now instantiate an object and save it:
-      return User.create(data);
-    })
-    .catch(function(err) {
-      // Handle any error in the chain
-      console.error(err);
-      db.close();
-    });
-}
+const saveUser = (data, callback = () => {}) => {
+  User.sync()
+    .then(() => User.create(data)) // Now instantiate an object and save it:
+    .then(res => callback(res))
+    .catch(err => callback(err));
+};
 
-let saveReview = (data) => {
-    Review.sync()
-    .then(function() {
-      // Now instantiate an object and save it:
-      return Review.create(data);
-    })
-    .catch(function(err) {
-      // Handle any error in the chain
-      console.error(err);
-      db.close();
-    });
-}
+const saveReview = (data, callback = () => {}) => {
+  Review.sync()
+    .then(() => Review.create(data)) // Now instantiate an object and save it:
+    .then(res => callback(res))
+    .catch(err => callback(err));
+};
 
-let saveImage = (data) => {
-    Image.sync()
-    .then(function() {
-      // Now instantiate an object and save it:
-      return Image.create(data);
-    })
-    .catch(function(err) {
-      // Handle any error in the chain
-      console.error(err);
-      db.close();
-    });
-}
+const saveImage = (data, callback = () => {}) => {
+  Image.sync()
+    .then(() => Image.create(data)) // Now instantiate an object and save it:
+    .then(res => callback(res))
+    .catch(err => callback(err));
+};
 
+const findReviews = (id, callback = () => {}) => {
+  Review.sync()
+    .then(() => Review.findAll({ where: { loc_id: id } }))
+    .then(reviews => callback(reviews))
+    .catch(err => callback(err));
+};
+
+const findImages = (id, callback = () => {}) => {
+  Image.sync()
+    .then(() => Image.findAll({ where: { review_id: id } }))
+    .then(images => callback(images))
+    .catch(err => callback(err));
+};
 module.exports = {
-    saveLocation: saveLocation,
-    saveUser: saveUser,
-    saveReview: saveReview,
-    saveImage: saveImage
-  };
+  saveLocation,
+  saveUser,
+  saveReview,
+  saveImage,
+  findReviews,
+  findImages,
+};

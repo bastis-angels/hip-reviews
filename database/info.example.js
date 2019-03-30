@@ -1,5 +1,5 @@
 
-module.exports =  {
+module.exports = {
   username: 'INPUT USERNAME',
-  password: 'INPUT PASSWORD'
+  password: 'INPUT PASSWORD',
 };
