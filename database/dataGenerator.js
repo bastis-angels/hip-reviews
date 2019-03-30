@@ -3,14 +3,14 @@ const faker = require('faker');
 const sequelize = require('./sequelize.js');
 
 // // generate locations data
-for (let i = 1; i < 5; i + 1) {
+for (let i = 1; i < 5; i += 1) {
 // save each location to locations table in user_reviews database
   sequelize.saveLocation({
     loc_id: i,
     loc_name: faker.address.city(),
   });
   // generate random number of reviews and user for each location
-  for (let x = 1; x < Math.floor(Math.random() * Math.floor(5)); x + 1) {
+  for (let x = 1; x < Math.floor(Math.random() * Math.floor(5)); x += 1) {
     // save each user to users table in user_reviews database
     sequelize.saveUser({
       name: faker.name.findName(),
@@ -24,7 +24,7 @@ for (let i = 1; i < 5; i + 1) {
       helpful: Math.floor(Math.random() * Math.floor(5)),
     });
     // generate random number of images for each review
-    for (let y = 1; y < Math.floor(Math.random() * Math.floor(5)); y + 1) {
+    for (let y = 1; y < Math.floor(Math.random() * Math.floor(5)); y += 1) {
     // save each image for each review in images table in user_reviews database
       sequelize.saveImage({
         review_id: x,
