@@ -65,6 +65,12 @@ const findReviews = (id, callback = () => {}) => {
     .then(reviews => callback(reviews))
     .catch(err => callback(err));
 };
+const findAllReviews = (callback = () => {}) => {
+  Review.sync()
+    .then(() => Review.findAll())
+    .then(reviews => callback(reviews))
+    .catch(err => callback(err));
+};
 
 const findImages = (id, callback = () => {}) => {
   Image.sync()
@@ -79,4 +85,5 @@ module.exports = {
   saveImage,
   findReviews,
   findImages,
+  findAllReviews,
 };
