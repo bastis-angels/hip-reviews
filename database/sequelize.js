@@ -26,7 +26,7 @@ const Review = db.define('reviews', {
 
 const Image = db.define('images', {
   image_id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-  review_id: { type: Sequelize.INTEGER, primaryKey: true },
+  review_id: { type: Sequelize.INTEGER },
   image_url: Sequelize.STRING,
   image_description: Sequelize.STRING,
 });
