@@ -9,12 +9,13 @@ class App extends React.Component {
             data: [],
         }
     }
+    
     componentDidMount() {
       this.getDataFromServer();
     }
-    
+        
     getDataFromServer() {
-        fetch('/reviews/location/6/')
+        fetch('/reviews/location/6/') // get the reviews from the location with id of 6 as default first just for testing purposes
         .then((response) => {
           return response.json();
         })
