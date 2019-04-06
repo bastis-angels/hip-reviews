@@ -13,13 +13,8 @@ app.use('/', express.static(path.join(__dirname, '../client/dist')));
 
 // get all reviews for a specific location
 app.get('/reviews/location/:loc_id/', (req, res) => {
-  // sequelize.findReviews(req.params.loc_id, (reviews) => {
-  //   console.log(reviews)
-  //   res.send(reviews);
-  // });
-
-  sequelize.db.query(`SELECT * FROM reviews INNER JOIN users on (reviews.loc_id = 
-    ${req.params.loc_id} && users.user_id = reviews.user_id)`).then(result => res.send(result[0]));
+  sequelize.db.query(`SELECT * FROM reviews INNER JOIN users on (reviews.loc_id = ${req.params.loc_id} && users.user_id = reviews.user_id)`)
+    .then(result => res.send(result[0]));
 });
 
 // get images for each reviews

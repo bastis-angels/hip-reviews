@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './Header.jsx';
 import ReviewList from './ReviewList.jsx';
 
+
 class App extends React.Component {
     constructor(){
         super();
@@ -28,7 +29,7 @@ class App extends React.Component {
     render() {
        return (
            <div>
-               <Header />
+               <Header length = {this.state.data.length} />
                <ReviewList reviews = {this.state.data}/>
            </div>
        )

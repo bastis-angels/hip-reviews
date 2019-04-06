@@ -25,14 +25,12 @@ for (let i = 1; i < 100; i += 1) {
       helpful: Math.floor(Math.random() * Math.floor(10)),
     });
     // generate random number of images for each review
-    for (let y = 1; y < Math.floor(Math.random() * Math.floor(5)); y += 1) {
     // save each image for each review in images table in user_reviews database
-      const imgId = Math.floor(Math.random() * 10) + 1;
-      sequelize.saveImage({
-        review_id: x,
-        image_description: faker.lorem.sentences(),
-        image_url: `https://s3.us-east-2.amazonaws.com/bastis-camp-reviews-photos/review-img/${imgId}.jpg`,
-      });
-    }
+    const imgId = Math.floor(Math.random() * 10) + 1;
+    sequelize.saveImage({
+      review_id: x,
+      image_description: faker.lorem.sentences(),
+      image_url: `https://s3.us-east-2.amazonaws.com/bastis-camp-reviews-photos/review-img/${imgId}.jpg`,
+    });
   }
 }
