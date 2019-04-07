@@ -1,17 +1,21 @@
 import React from 'react';
 import Header from './Header.jsx';
 import ReviewList from './ReviewList.jsx';
+import styled from 'styled-components';
 
 
 class App extends React.Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             data: [],
         }
+        this.getDataFromServer = this.getDataFromServer.bind(this);
     }
     
     componentDidMount() {
+      
+      console.log(window.location.search);
       this.getDataFromServer();
     }
         
@@ -21,20 +25,27 @@ class App extends React.Component {
           return response.json();
         })
         .then((myJson) => {
-           this.setState({data: myJson}, () => {
-               console.log(this.state.data);
-           })
+           this.setState({data: myJson})
         });
       }
     render() {
        return (
-           <div>
-               <Header length = {this.state.data.length} />
-               <ReviewList reviews = {this.state.data}/>
-           </div>
+      
+           <Reviews>
+                 <Header length = {this.state.data.length} />
+                 <ReviewList reviews = {{data: this.state.data, reload: this.getDataFromServer}}/>
+           </Reviews>
        )
     }
     
 };
+
+
+const Reviews = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;
 
 export default App;

@@ -36,8 +36,11 @@
     "mysql": "^2.16.0",
     "mysql2": "^1.6.5",
     "nodemon": "^1.18.10",
+    "query-string": "^6.4.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-router": "^5.0.0",
+    "react-router-dom": "^5.0.0",
     "sequelize": "^5.2.3",
     "styled-components": "^4.2.0"
   },

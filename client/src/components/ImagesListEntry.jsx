@@ -1,13 +1,14 @@
 import React from 'react';
+import styled from 'styled-components';
 const moment = require('moment');
 moment().format();
 
 const ImagesListEntry = (props) => {
 
     const renderImages = (props) => {
-           return props.ImageList.map((image) => {
+           return props.ImageList.map((image, idx) => {
                return( 
-                   <span> <img src = {image.image_url} alt="Smiley face" height="70" width="70"></img></span>
+                   <Image key = {idx}> <img src = {image.image_url} alt="Smiley face" height="120" width="120"></img></Image>
                )
            })
     }
@@ -17,5 +18,16 @@ const ImagesListEntry = (props) => {
     )
 };
 
+const Image =  styled.span`
+    width: 22%;
+    height: auto;
+    border-radius: 5px;
+    border: 0;
+    object-fit: cover;
+    margin-right: 2.5%;
+    margin-bottom: 25px;
+    margin-top: 7px;
+    cursor: pointer;
+`;
 export default ImagesListEntry;
  

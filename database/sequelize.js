@@ -28,6 +28,7 @@ const Review = db.define('reviews', {
 const Image = db.define('images', {
   image_id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   review_id: { type: Sequelize.INTEGER },
+  loc_id: { type: Sequelize.INTEGER },
   image_url: Sequelize.STRING,
   image_description: Sequelize.STRING,
 });
@@ -73,12 +74,25 @@ const findAllReviews = (callback = () => {}) => {
     .catch(err => callback(err));
 };
 
-const findImages = (id, callback = () => {}) => {
+const findImages = (revId, locId, callback = () => {}) => {
   Image.sync()
-    .then(() => Image.findAll({ where: { review_id: id } }))
+    .then(() => Image.findAll({ where: { review_id: revId, loc_id: locId } }))
     .then(images => callback(images))
     .catch(err => callback(err));
 };
+
+const updateHelpfulVotes = (userId, locId, callback = () => {}) => {
+  Review.sync()
+    .then(() => Review.findOne({
+      where: {
+        user_id: userId,
+        loc_id: locId,
+      },
+    }))
+    .then(review => review.increment('helpful'))
+    .then(() => callback());
+};
+
 module.exports = {
   db,
   saveLocation,
@@ -88,4 +102,5 @@ module.exports = {
   findReviews,
   findImages,
   findAllReviews,
+  updateHelpfulVotes,
 };
