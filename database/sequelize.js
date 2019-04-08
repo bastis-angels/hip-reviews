@@ -22,11 +22,12 @@ const Review = db.define('reviews', {
   user_id: { type: Sequelize.INTEGER },
   loc_id: { type: Sequelize.INTEGER },
   context: Sequelize.STRING,
+  helpful: Sequelize.STRING,
 });
 
 const Image = db.define('images', {
   image_id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-  review_id: { type: Sequelize.INTEGER, primaryKey: true },
+  review_id: { type: Sequelize.INTEGER },
   image_url: Sequelize.STRING,
   image_description: Sequelize.STRING,
 });
@@ -79,6 +80,7 @@ const findImages = (id, callback = () => {}) => {
     .catch(err => callback(err));
 };
 module.exports = {
+  db,
   saveLocation,
   saveUser,
   saveReview,
