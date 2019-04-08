@@ -10,7 +10,7 @@ for (let i = 1; i < 100; i += 1) {
     loc_name: faker.address.city(),
   });
   // generate random number of reviews and user for each location
-  for (let x = 1; x < Math.floor(Math.random() * Math.floor(25) + 5); x += 1) {
+  for (let x = 1; x < Math.floor(Math.random() * Math.floor(30) + 15); x += 1) {
     // save each user to users table in user_reviews database
     const avatarId = Math.floor(Math.random() * 9) + 1;
     sequelize.saveUser({

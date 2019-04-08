@@ -81,7 +81,7 @@ const findImages = (revId, locId, callback = () => {}) => {
     .catch(err => callback(err));
 };
 
-const updateHelpfulVotes = (userId, locId, callback = () => {}) => {
+const incrementHelpfulVotes = (userId, locId, callback = () => {}) => {
   Review.sync()
     .then(() => Review.findOne({
       where: {
@@ -90,6 +90,18 @@ const updateHelpfulVotes = (userId, locId, callback = () => {}) => {
       },
     }))
     .then(review => review.increment('helpful'))
+    .then(() => callback());
+};
+
+const decrementHelpfulVotes = (userId, locId, callback = () => {}) => {
+  Review.sync()
+    .then(() => Review.findOne({
+      where: {
+        user_id: userId,
+        loc_id: locId,
+      },
+    }))
+    .then(review => review.decrement('helpful'))
     .then(() => callback());
 };
 
@@ -102,5 +114,6 @@ module.exports = {
   findReviews,
   findImages,
   findAllReviews,
-  updateHelpfulVotes,
+  incrementHelpfulVotes,
+  decrementHelpfulVotes,
 };

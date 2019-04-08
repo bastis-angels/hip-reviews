@@ -2,21 +2,31 @@ import React from 'react';
 import ImagesList from './ImagesList.jsx';
 import styled from 'styled-components'
 const moment = require('moment');
-moment().format();
 
 class ReviewListEntry extends React.Component {
     constructor(props) {
        super(props);
+       this.state = {
+          process: false,
+       }
        this.updateHelpfulVote = this.updateHelpfulVote.bind(this);
     }
+    
     updateHelpfulVote(data) {
+      let url;
+      if(this.state.process) {
+         url =  `/${data.loc_id}/${data.review_id}/1`;
+      } else {
+         url =  `/${data.loc_id}/${data.review_id}/0`;   
+      }
 
-      fetch(`/${data.loc_id}/${data.review_id}`,{
+      fetch(url,{
         method: "PATCH",
       }) // get the reviews from the location with id of 6 as default first just for testing purposes
       .then(() => {
          this.props.reviews.reload();
       })
+      this.setState({process: !this.state.process});
     }
     renderReviews(props) {
       return this.props.reviews.data.map((review, idx) => {
@@ -80,7 +90,7 @@ const Body = styled.p`
 `
 
 const Container = styled.div`
-width: 800px;
+  width: 800px;
 `
 
 export default ReviewListEntry;

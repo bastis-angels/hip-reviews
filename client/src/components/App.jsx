@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 
 class App extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             data: [],
@@ -14,23 +14,21 @@ class App extends React.Component {
     }
     
     componentDidMount() {
-      
-      console.log(window.location.search);
       this.getDataFromServer();
     }
         
     getDataFromServer() {
-        fetch('/reviews/location/6/') // get the reviews from the location with id of 6 as default first just for testing purposes
+        fetch('/reviews/location/1/') // get the reviews from the location with id of 6 as default first just for testing purposes
         .then((response) => {
           return response.json();
         })
-        .then((myJson) => {
-           this.setState({data: myJson})
+        .then((results) => {
+           this.setState({data: results})
         });
-      }
+    }
+
     render() {
-       return (
-      
+       return (   
            <Reviews>
                  <Header length = {this.state.data.length} />
                  <ReviewList reviews = {{data: this.state.data, reload: this.getDataFromServer}}/>

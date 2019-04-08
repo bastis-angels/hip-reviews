@@ -1,20 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-const moment = require('moment');
-moment().format();
 
 const ImagesListEntry = (props) => {
 
     const renderImages = (props) => {
-           return props.ImageList.map((image, idx) => {
-               return( 
-                   <Image key = {idx}> <img src = {image.image_url} alt="Smiley face" height="120" width="120"></img></Image>
-               )
-           })
+        return props.ImageList.map((image, idx) => {
+            return ( 
+                <Image key = {idx}> <img src = {image.image_url} alt="Smiley face" height="120" width="120"></img></Image>
+            )
+        });
     }
 
-    return(
-        <div>{renderImages(props)}</div>
+    return (
+       <div>{renderImages(props)}</div>
     )
 };
 

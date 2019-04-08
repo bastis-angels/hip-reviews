@@ -22,8 +22,8 @@ class ImagesList extends React.Component {
         .then((response) => {
           return response.json();
         })
-        .then((myJson) => {
-           this.setState({data: myJson})
+        .then((results) => {
+           this.setState({data: results})
         });
       }
     
