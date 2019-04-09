@@ -8,7 +8,7 @@ const sequelize = require('../database/sequelize.js');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use('/:id', express.static(path.join(__dirname, '../client/dist')));
+app.use('/listing/:id', express.static(path.join(__dirname, '../client/dist')));
 
 
 // get all reviews for a specific location
