@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Header = () => {
+const Header = (props) => {
     return(
-      <div>
-        <span><b>123 Written reviews</b>/ 97 Written reviews at other listing  </span>   <span>recent/<b>best</b></span>
-      </div>
+        <div>
+           <b>{props.length} Written reviews</b>/ 97 Written reviews at other listing recent/<b>best</b>
+        </div>      
     )
 };
 
