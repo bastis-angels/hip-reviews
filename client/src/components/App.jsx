@@ -20,7 +20,7 @@ class App extends React.Component {
     }
         
     getDataFromServer(url) {
-        fetch(`http://localhost:3000/reviews${url}`) 
+        fetch(`http://localhost:3001/reviews${url}`) 
         .then((response) => {
           return response.json();
         })
