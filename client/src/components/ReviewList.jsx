@@ -6,7 +6,7 @@ const ReviewList = (props) => {
     <div>
        <ReviewListEntry reviews = { {data: props.reviews.data, reload: props.reviews.reload} }/>
        <br></br>
-       <span>See all {props.reviews.length} reviews...</span>
+       <span onClick = {() => props.reviews.seeAll()}>See all {props.reviews.length} reviews...</span>
     </div>)
 };
 

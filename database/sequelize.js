@@ -63,7 +63,7 @@ const saveImage = (data, callback = () => {}) => {
 
 const findReviews = (id, callback = () => {}) => {
   Review.sync()
-    .then(() => Review.findAll({ where: { loc_id: id } }))
+    .then(() => Review.findAll({ sort: ['helpful', 'descending'], where: { loc_id: id } }))
     .then(reviews => callback(reviews))
     .catch(err => callback(err));
 };

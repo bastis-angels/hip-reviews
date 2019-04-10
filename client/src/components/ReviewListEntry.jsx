@@ -22,7 +22,7 @@ class ReviewListEntry extends React.Component {
 
       fetch(url,{
         method: "PATCH",
-      }) // get the reviews from the location with id of 6 as default first just for testing purposes
+      })
       .then(() => {
          this.props.reviews.reload();
       })

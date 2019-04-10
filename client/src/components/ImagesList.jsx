@@ -18,7 +18,7 @@ class ImagesList extends React.Component {
     }  
         
     getDataFromServer() {
-        fetch(`/reviews/location/${this.loc_id}/${this.review_id}/images/`) // get the reviews from the location with id of 6 as default first just for testing purposes
+        fetch(`http://localhost:3000/reviews/location/${this.loc_id}/${this.review_id}/images/`) // get the reviews from the location with id of 6 as default first just for testing purposes
         .then((response) => {
           return response.json();
         })

@@ -1,18 +1,19 @@
 const express = require('express');
+const cors = require('cors');
 
 const port = 3000;
 const app = express();
-const path = require('path');
 const bodyParser = require('body-parser');
 const sequelize = require('../database/sequelize.js');
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use('/listing/:id', express.static(path.join(__dirname, '../client/dist')));
+app.use('/listing/:id', express.static('public'));
 
 
 // get all reviews for a specific location
-app.get('/reviews/location/:loc_id/', (req, res) => {
+app.get('/reviews/listing/:loc_id/', (req, res) => {
   sequelize.db.query(`SELECT * FROM reviews INNER JOIN users on (reviews.loc_id = ${req.params.loc_id} && users.user_id = reviews.user_id)`)
     .then(result => res.send(result[0].concat(result[1])));
 });
